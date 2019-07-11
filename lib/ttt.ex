@@ -1,18 +1,6 @@
 defmodule TTT do
-  @moduledoc """
-  Documentation for TTT.
-  """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> TTT.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def start_new_game(user_answer) do
+    if user_answer == "Y", do:  IO.puts("You have started a new game of TTT!")
   end
 end
