@@ -7,11 +7,11 @@ defmodule Console do
     IO.puts(message)
   end
 
-  def display_welcome(user_answer) do
+  def display_welcome(user_answer, welcome_msg, goodbye_msg) do
     if user_answer == "Y" do
-      IO.puts("You have started a new game of TTT!\n\nHOW TO PLAY\n===========\nPlayers alternate placing different markers on the board until either one player has three in a row, horizontally, vertically, or diagonally; or all nine squares are filled.\nIf a player is able to draw three of their markers in a row, then that player wins.\n")
+      IO.puts(welcome_msg)
     else
-      IO.puts("Goodbye!")
+      IO.puts(goodbye_msg)
     end
   end
 end
