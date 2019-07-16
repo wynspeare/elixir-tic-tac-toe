@@ -7,11 +7,11 @@ defmodule Console do
     IO.puts(message)
   end
 
-  def display_welcome(user_answer, welcome_msg, goodbye_msg) do
-    if user_answer == "Y" do
-      IO.puts(welcome_msg)
+  def display_cond_message(user_answer, yes_msg, no_msg) do
+    if user_answer == true do
+      IO.puts(yes_msg)
     else
-      IO.puts(goodbye_msg)
+      IO.puts(no_msg)
     end
   end
 end

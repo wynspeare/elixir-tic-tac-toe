@@ -5,13 +5,9 @@ defmodule ConsoleTest do
 
   import ExUnit.CaptureIO
 
-  test "instructions displayed console when user enters Y" do
+  test "provided message displays to the console" do
     response = fn ->
-      assert Console.display_welcome(
-               "Y",
-               Messages.get_message(:welcome),
-               Messages.get_message(:goodbye)
-             ) == :ok
+      assert Console.display_message(Messages.get_message(:welcome)) == :ok
     end
 
     assert capture_io(response) ==
