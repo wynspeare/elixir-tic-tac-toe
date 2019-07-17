@@ -7,7 +7,7 @@ defmodule ConsoleTest do
 
   test "provided message displays to the console" do
     response = fn ->
-      assert Console.display_message(Messages.get_message(:welcome)) == :ok
+      assert :welcome |> Messages.get() |> Console.display() == :ok
     end
 
     assert capture_io(response) ==
