@@ -12,19 +12,19 @@ defmodule Runner do
     |> Messages.get()
     |> Console.get_input()
     |> TTT.start_new_game()
-    |> begin_game?()
+    |> begin_game()
 
     get_markers()
 
     board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     Console.display_board(board)
-    # Console.display_board([1, "X", 3, "O", 5, 6, 7, 8, 9])
+
   end
 
-  def begin_game?("Y"), do: :welcome |> Messages.get() |> Console.display()
-  def begin_game?("N"), do: :goodbye |> Messages.get() |> Console.display()
+  def begin_game("Y"), do: :welcome |> Messages.get() |> Console.display()
+  def begin_game("N"), do: :goodbye |> Messages.get() |> Console.display()
 
-  def begin_game?(_) do
+  def begin_game(_) do
     choose_again()
     start_game()
   end

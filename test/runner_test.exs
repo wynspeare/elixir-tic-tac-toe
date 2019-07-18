@@ -5,7 +5,7 @@ defmodule RunnerTest do
 
   test "when user selects Y to start new game a welcome message is shown" do
     response = fn ->
-      assert Runner.begin_game?("Y") == :ok
+      assert Runner.begin_game("Y") == :ok
     end
 
     assert capture_io(response) ==
@@ -14,7 +14,7 @@ defmodule RunnerTest do
 
   test "when user selects N to start new game a goodbye message is shown" do
     response = fn ->
-      assert Runner.begin_game?("N") == :ok
+      assert Runner.begin_game("N") == :ok
     end
 
     assert capture_io(response) == "Okay, Goodbye!\n"
@@ -26,6 +26,6 @@ defmodule RunnerTest do
     end
 
     assert capture_io(response) ==
-             "Great!\n\nPlayer One - Your marker is \"X\".\nPLayer Two - Your marker is \"O\".\n\n"
+             "Great!\n\nPlayer One - Your marker is \"X\".\nPlayer Two - Your marker is \"O\".\n\n"
   end
 end
