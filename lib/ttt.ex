@@ -1,18 +1,7 @@
 defmodule TTT do
-  @moduledoc """
-  Documentation for TTT.
-  """
+  alias Validator
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> TTT.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def start_new_game(user_answer) do
+    Validator.check_user_input(user_answer)
   end
 end
