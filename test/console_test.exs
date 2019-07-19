@@ -22,6 +22,23 @@ defmodule ConsoleTest do
     assert Console.format_board([1, "X"]) == ["| 1 ", "| X "]
   end
 
+  test "split_into_rows takes a list of 9 elements returns a chunked list of 3 rows" do
+    assert Console.split_into_rows([1, "X", 3, 4, 5, 6, "O", "X", 9]) == [
+             [1, "X", 3],
+             [4, 5, 6],
+             ["O", "X", 9]
+           ]
+  end
+
+  test "split_into_rows takes a list of 16 elements returns a chunked list of 4 rows" do
+    assert Console.split_into_rows([1, 2, 3, 4, 5, 6, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16]) == [
+             [1, 2, 3, 4],
+             [5, 6, 6, 8],
+             [9, 10, 11, 12],
+             [13, 14, 15, 16]
+           ]
+  end
+
   test "format_rows inserts a divider in chunked board" do
     assert Console.add_row_dividers([
              ["| 1 ", "| X ", "| 3 "],

@@ -1,6 +1,4 @@
 defmodule Console do
-  # import Cells, only: [end_of_row: 2]
-
   def get_input(message) do
     String.trim(IO.gets(message))
   end
@@ -13,6 +11,10 @@ defmodule Console do
 
   def format_board([head | tail]) do
     [format_cell(head) | format_board(tail)]
+  end
+
+  def split_into_rows(board) do
+    Enum.chunk_every(board, round(:math.sqrt(Kernel.length(board))))
   end
 
   def format_cell(cell) when is_integer(cell), do: "| " <> Kernel.inspect(cell) <> " "
@@ -29,7 +31,7 @@ defmodule Console do
 
   def display_board(board) do
     format_board(board)
-    |> Enum.chunk_every(3)
+    |> split_into_rows()
     |> add_row_dividers()
     |> display()
   end
