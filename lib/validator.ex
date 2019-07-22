@@ -6,11 +6,4 @@ defmodule Validator do
       _ -> false
     end
   end
-
-  def convert_user_input(user_answer) do
-    case user_answer do
-      "Y" -> true
-      "N" -> false
-    end
-  end
 end

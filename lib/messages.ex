@@ -8,7 +8,7 @@ defmodule Messages do
       goodbye: "Okay, Goodbye!",
       default_markers: "Do you want to use the standard markers - X and O?\n",
       show_default_markers:
-        "Great!\n\nPlayer One - Your marker is \"X\".\nPLayer Two - Your marker is \"O\".\n",
+        "Great!\n\nPlayer One - Your marker is \"X\".\nPlayer Two - Your marker is \"O\".\n",
       get_marker: "Okay no problem! Please enter a marker for player one:\n"
     }
 
