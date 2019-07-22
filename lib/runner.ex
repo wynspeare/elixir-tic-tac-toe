@@ -18,6 +18,11 @@ defmodule Runner do
 
     board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     Console.display_board(board)
+
+    Messages.get(:get_move, "X")
+    |> Console.get_input()
+    |> Board.place_marker(board, "X")
+    |> Console.display_board()
   end
 
   def begin_game("Y"), do: :welcome |> Messages.get() |> Console.display()
