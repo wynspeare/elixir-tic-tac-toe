@@ -9,21 +9,18 @@ defmodule Messages do
       default_markers: "Do you want to use the standard markers - X and O?\n",
       show_default_markers:
         "Great!\n\nPlayer One - Your marker is \"X\".\nPlayer Two - Your marker is \"O\".\n",
-      get_marker: "Okay no problem! Please enter a marker for player one:\n",
+      get_marker: "Okay no problem! Please enter a marker for player one:\n"
       # assert ~s[1 + 1 = #{1 + 1}] == "1 + 1 = 2"
-
-
     }
 
     messages[term]
   end
 
   def get(term, marker) do
-  messages = %{
-    get_move: "Player #{marker} it is your turn. Please select a space 1 - 9:",
-  }
+    messages = %{
+      get_move: "Player #{marker} it is your turn. Please select a space 1 - 9:\n"
+    }
 
-  messages[term]
-end
-
+    messages[term]
+  end
 end

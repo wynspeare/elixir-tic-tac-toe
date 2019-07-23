@@ -1,8 +1,6 @@
 defmodule Board do
-
   def place_marker(location, board, marker) do
     String.to_integer(location)
-    |> (&(List.replace_at(board, &1 - 1, marker))).()
+    |> (&List.replace_at(board, &1 - 1, marker)).()
   end
-
 end

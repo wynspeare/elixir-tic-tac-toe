@@ -15,13 +15,15 @@ defmodule Runner do
     |> begin_game()
 
     get_markers()
+    player_one = "X"
+    player_two = "O"
+    current_player = player_one
 
     board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     Console.display_board(board)
 
-    Messages.get(:get_move, "X")
-    |> Console.get_input()
-    |> Board.place_marker(board, "X")
+    Player.get_move(current_player)
+    |> TTT.turn(board)
     |> Console.display_board()
   end
 
