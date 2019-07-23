@@ -14,7 +14,6 @@ defmodule ConsoleTest do
              "You have started a new game of TTT!\n\nHOW TO PLAY\n===========\nPlayers alternate placing different markers on the board until either one player has three in a row, horizontally, vertically, or diagonally; or all nine squares are filled.\nIf a player is able to draw three of their markers in a row, then that player wins.\n\n"
   end
 
-
   test "user can see a board of 1 - 9" do
     response = fn ->
       assert Console.display_board([1, 2, 3, 4, 5, 6, 7, 8, 9]) == :ok

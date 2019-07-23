@@ -1,8 +1,4 @@
 defmodule Runner do
-  alias Console
-  alias TTT
-  alias Messages
-
   def main(_args) do
     start_game()
   end
@@ -15,15 +11,14 @@ defmodule Runner do
     |> begin_game()
 
     get_markers()
-    player_one = "X"
-    player_two = "O"
-    current_player = player_one
+    new_game = TTT.set_markers({"X", "O"})
+
+    IO.puts(new_game.player_one)
 
     board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     Console.display_board(board)
 
-    Player.get_move(current_player)
-    |> TTT.turn(board)
+    TTT.turn(new_game.player_one, board)
     |> Console.display_board()
   end
 
@@ -43,6 +38,7 @@ defmodule Runner do
   end
 
   def use_default_markers?("Y"), do: :show_default_markers |> Messages.get() |> Console.display()
+
   def use_default_markers?("N"), do: :get_marker |> Messages.get() |> Console.get_input()
 
   def use_default_markers?(_) do

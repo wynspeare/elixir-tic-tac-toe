@@ -6,4 +6,10 @@ defmodule Validator do
       _ -> false
     end
   end
+
+  def convert_input(user_location), do: String.to_integer(user_location)
+
+  def is_numerical_location(input) do
+    {String.match?(input, ~r/^[0-9]*$/), input}
+  end
 end
