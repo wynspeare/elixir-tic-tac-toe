@@ -11,6 +11,8 @@ defmodule TTT do
     Player.get_move(player, board)
   end
 
+  @spec turn(integer, [any], %{current_player: any, player_one: any}) ::
+          {[any], %{current_player: any, player_one: any}}
   def turn(location, board, symbols) do
     updated_board = Board.place_marker(location, board, symbols.current_player)
     symbols = TTT.switch_player(symbols.current_player, symbols)

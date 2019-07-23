@@ -9,8 +9,8 @@ defmodule Messages do
       default_markers: "Do you want to use the standard markers - X and O?\n",
       show_default_markers:
         "Great!\n\nPlayer One - Your marker is \"X\".\nPlayer Two - Your marker is \"O\".\n",
-      get_marker: "Okay no problem! Please enter a marker for player one:\n"
-      # assert ~s[1 + 1 = #{1 + 1}] == "1 + 1 = 2"
+      get_marker: "Okay no problem! Please enter a marker for player one:\n",
+      cell_filled: "That cell is filled please choose an empty location."
     }
 
     messages[term]
