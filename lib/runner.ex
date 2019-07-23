@@ -11,15 +11,21 @@ defmodule Runner do
     |> begin_game()
 
     get_markers()
-    new_game = TTT.set_markers({"X", "O"})
-
-    IO.puts(new_game.player_one)
+    symbols = TTT.set_markers({"X", "O"})
 
     board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    game_loop({board, symbols})
+  end
+
+  def game_loop({board, symbols}) do
     Console.display_board(board)
 
-    TTT.turn(new_game.player_one, board)
-    |> Console.display_board()
+    unless Board.is_filled(board) do
+      TTT.get_current_move(symbols.current_player, board)
+      |> TTT.turn(board, symbols)
+      |> game_loop()
+    end
   end
 
   def begin_game("Y"), do: :welcome |> Messages.get() |> Console.display()
