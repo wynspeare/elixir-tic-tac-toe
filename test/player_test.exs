@@ -1,8 +1,9 @@
 defmodule PlayerTest do
   use ExUnit.Case
 
-  # test "is_valid_space takes in a chosen location check the space is empty" do
-  #   board = [1, "X", "X", 4, 5, "O", "O", "O", 9]
-  #   assert Player.is_valid_space({true, 1}, _marker, board) ==
-  # end
+  test "is_valid_location returns the cell location if the move is valid" do
+    board = [1, "X", "X", 4, 5, "O", "O", "O", 9]
+    valid_move = Validator.is_valid_move("1", board)
+    assert Player.is_valid_location(valid_move, "X", board) == 1
+  end
 end

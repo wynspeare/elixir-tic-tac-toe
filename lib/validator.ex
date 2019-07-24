@@ -17,6 +17,6 @@ defmodule Validator do
   def is_valid_move(cell, board) do
     is_numerical_location(cell)
     |> convert_input()
-    |> Board.is_space_empty(board)
+    |> Board.is_cell_empty(board)
   end
 end

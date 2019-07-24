@@ -4,14 +4,14 @@ defmodule Board do
   end
 
   def is_filled(board) do
-    !Enum.any?(board, fn space -> Kernel.is_integer(space) end)
+    !Enum.any?(board, fn cell -> Kernel.is_integer(cell) end)
   end
 
-  def available_spaces(board) do
-    Enum.filter(board, fn space -> Kernel.is_integer(space) end)
+  def available_cells(board) do
+    Enum.filter(board, fn cell -> Kernel.is_integer(cell) end)
   end
 
-  def is_space_empty(space, board) do
-    {Enum.member?(available_spaces(board), space), space}
+  def is_cell_empty(cell, board) do
+    {Enum.member?(available_cells(board), cell), cell}
   end
 end

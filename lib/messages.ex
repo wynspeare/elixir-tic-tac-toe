@@ -18,7 +18,7 @@ defmodule Messages do
 
   def get(term, marker) do
     messages = %{
-      get_move: "Player #{marker} it is your turn. Please select a space 1 - 9:\n"
+      get_move: "Player #{marker} it is your turn. Please select a cell 1 - 9:\n"
     }
 
     messages[term]
