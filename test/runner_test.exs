@@ -21,11 +21,6 @@ defmodule RunnerTest do
   end
 
   test "user can choose default markers" do
-    response = fn ->
-      assert Runner.use_default_markers?("Y") == :ok
-    end
-
-    assert capture_io(response) ==
-             "Great!\n\nPlayer One - Your marker is \"X\".\nPlayer Two - Your marker is \"O\".\n\n"
+    assert Runner.use_default_markers?("Y") == {"X", "O"}
   end
 end
