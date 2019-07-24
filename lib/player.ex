@@ -8,14 +8,14 @@ defmodule Player do
   def get_valid_move(marker, board) do
     get_cell_location(marker)
     |> Validator.is_valid_move(board)
-    |> is_valid_location(marker, board)
+    |> get_valid_location(marker, board)
   end
 
-  def is_valid_location({true, move}, _marker, _board) do
-    move
+  def get_valid_location(is_valid, _marker, _board) when elem(is_valid, 0) == true do
+    elem(is_valid, 1)
   end
 
-  def is_valid_location({false, _move}, marker, board) do
+  def get_valid_location(is_valid, marker, board) when elem(is_valid, 0) == false do
     :cell_filled |> Messages.get() |> Console.display()
     get_valid_move(marker, board)
   end
