@@ -13,12 +13,14 @@ defmodule Runner do
     get_markers()
     symbols = TTT.set_markers({"X", "O"})
 
+
     board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-    game_loop({board, symbols})
+    TTT.build_players("X", "O")
+    |> game_loop({board, symbols})
   end
 
-  def game_loop({board, symbols}) do
+  def game_loop(players, {board, symbols}) do
     Console.display_board(board)
 
     unless Board.is_filled(board) do

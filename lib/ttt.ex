@@ -7,12 +7,18 @@ defmodule TTT do
     Validator.check_user_input(user_answer)
   end
 
+  def build_players(marker_1, marker_2) do
+    player_1 = %HumanPlayer{marker: marker_1}
+    player_2 = %HumanPlayer{marker: marker_2}
+    {player_1, player_2}
+  end
+
   def get_current_move(player, board) do
+    # player_1 = %HumanPlayer{marker: player}
+    # player.get_move(player.marker, board)
     Player.get_move(player, board)
   end
 
-  @spec turn(integer, [any], %{current_player: any, player_one: any}) ::
-          {[any], %{current_player: any, player_one: any}}
   def turn(location, board, symbols) do
     updated_board = Board.place_marker(location, board, symbols.current_player)
     symbols = TTT.switch_player(symbols.current_player, symbols)
