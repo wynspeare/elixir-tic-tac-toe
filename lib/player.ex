@@ -8,12 +8,17 @@ defmodule Player do
     |> get_move(marker, board)
   end
 
-  def get_move(is_valid, marker, board) when elem(is_valid, 0) == false do
+  def get_move({false, location}, marker, board) when is_integer(location) do
     Messages.get(:cell_filled) |> Console.display()
     get_move(marker, board)
   end
 
-  def get_move(is_valid, _, _) do
-    elem(is_valid, 1)
+  def get_move({false, location}, marker, board) do
+    Messages.get(:invalid_move, location) |> Console.display()
+    get_move(marker, board)
+  end
+
+  def get_move({true, location}, _, _) do
+    location
   end
 end

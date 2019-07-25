@@ -7,8 +7,13 @@ defmodule Validator do
     end
   end
 
-  def convert_input(user_location) when elem(user_location, 0) == true,
-    do: String.to_integer(elem(user_location, 1))
+  def convert_input({is_integer, location}) when is_integer == true do
+    String.to_integer(location)
+  end
+
+  def convert_input({false, location}) do
+    {false, location}
+  end
 
   def is_numerical_location(input) do
     {String.match?(input, ~r/^[0-9]*$/), input}

@@ -16,9 +16,10 @@ defmodule Messages do
     messages[term]
   end
 
-  def get(term, marker) do
+  def get(term, value) do
     messages = %{
-      get_move: "Player #{marker} it is your turn. Please select a cell 1 - 9:\n"
+      get_move: "Player #{value} it is your turn. Please select a cell 1 - 9:\n",
+      invalid_move: "\" #{value} \" is not a number, please enter 1 - 9."
     }
 
     messages[term]
