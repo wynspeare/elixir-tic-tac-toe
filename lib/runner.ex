@@ -11,8 +11,8 @@ defmodule Runner do
     |> begin_game()
 
     get_markers()
-    |> TTT.build_players()
-    |> TTT.build_game()
+    |> Players.build()
+    |> Game.build()
     |> game_loop()
   end
 
@@ -20,8 +20,7 @@ defmodule Runner do
     Console.display_board(game.board)
 
     unless Board.is_filled(game.board) do
-      TTT.get_current_move(game)
-      |> TTT.turn(game)
+      TTT.turn(game)
       |> game_loop()
     end
   end

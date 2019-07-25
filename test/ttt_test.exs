@@ -23,7 +23,7 @@ defmodule TTTTest do
     assert TTT.switch_player("X", game) == %Player{marker: "O"}
   end
 
-  test "turn takes in a cell location and game and returns a game with updated board and switched current player" do
+  test "get_current_move returns an updated board when a valid move is passed in" do
     game = %Game{
       board: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       player_one: %Player{marker: "X"},
@@ -31,11 +31,6 @@ defmodule TTTTest do
       current_player: %Player{marker: "X"}
     }
 
-    assert TTT.turn(1, game) == %Game{
-             board: ["X", 2, 3, 4, 5, 6, 7, 8, 9],
-             player_one: %Player{marker: "X"},
-             player_two: %Player{marker: "O"},
-             current_player: %Player{marker: "O"}
-           }
+    assert TTT.get_current_move({true, 1}, game) == ["X", 2, 3, 4, 5, 6, 7, 8, 9]
   end
 end
