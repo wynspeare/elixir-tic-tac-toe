@@ -26,8 +26,13 @@ defmodule Runner do
     end
   end
 
-  def begin_game("Y"), do: :welcome |> Messages.get() |> Console.display()
-  def begin_game("N"), do: :goodbye |> Messages.get() |> Console.display()
+  def begin_game("Y") do
+    :welcome |> Messages.get() |> Console.display()
+  end
+
+  def begin_game("N") do
+    :goodbye |> Messages.get() |> Console.display()
+  end
 
   def begin_game(_) do
     choose_again()
@@ -46,12 +51,16 @@ defmodule Runner do
     {"X", "O"}
   end
 
-  def use_default_markers?("N"), do: :get_marker |> Messages.get() |> Console.get_input()
+  def use_default_markers?("N") do
+    :get_marker |> Messages.get() |> Console.get_input()
+  end
 
   def use_default_markers?(_) do
     choose_again()
     get_markers()
   end
 
-  def choose_again(), do: :choose_again |> Messages.get() |> Console.display()
+  def choose_again() do
+    :choose_again |> Messages.get() |> Console.display()
+  end
 end
