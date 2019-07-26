@@ -11,10 +11,6 @@ defmodule Validator do
     {false, location}
   end
 
-  def is_numerical_location("") do
-    {false, ""}
-  end
-
   def is_numerical_location(input) do
     {String.match?(input, ~r/^[0-9]*$/), input}
   end

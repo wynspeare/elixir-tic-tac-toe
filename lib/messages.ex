@@ -26,10 +26,11 @@ defmodule Messages do
   def get(term, value_1, value_2) do
     messages = %{
       show_markers:
-      "Let's begin!\n\nPlayer One - Your marker is \"#{value_1}\".\nPlayer Two - Your marker is \"#{value_2}\".\n",
+        "Let's begin!\n\nPlayer One - Your marker is \"#{value_1}\".\nPlayer Two - Your marker is \"#{
+          value_2
+        }\".\n"
     }
+
     messages[term]
   end
-
-
 end

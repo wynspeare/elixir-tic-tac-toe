@@ -10,3 +10,5 @@ defmodule Player do
     |> Console.get_input()
   end
 end
+
+# capture_IO("1", move("X"))
