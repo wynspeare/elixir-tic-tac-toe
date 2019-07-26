@@ -3,7 +3,7 @@ defmodule Runner do
     run()
   end
 
-  def run() do
+  def run do
     Messages.get(:start_game)
     |> Console.get_input()
     |> run()

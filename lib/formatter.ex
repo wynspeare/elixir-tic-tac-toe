@@ -32,7 +32,8 @@ defmodule Formatter do
   end
 
   def format_board(board) do
-    format_cells(board)
+    board
+    |> format_cells()
     |> split_into_rows()
     |> add_row_dividers()
   end

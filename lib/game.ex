@@ -17,7 +17,8 @@ defmodule Game do
     Console.display_board(game.board)
 
     unless Board.is_filled(game.board) do
-      TTT.turn(game)
+      game
+      |> TTT.turn()
       |> loop()
     end
   end

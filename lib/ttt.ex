@@ -7,21 +7,24 @@ defmodule TTT do
   end
 
   def get_current_move({false, move}, game) when is_integer(move) do
-    Messages.get(:cell_filled)
+    :cell_filled
+    |> Messages.get()
     |> Console.display()
 
     get_current_move(game)
   end
 
   def get_current_move({false, move}, game) do
-    Messages.get(:invalid_move, move)
+    :invalid_move
+    |> Messages.get(move)
     |> Console.display()
 
     get_current_move(game)
   end
 
   def get_current_move(is_valid, game) do
-    elem(is_valid, 1)
+    is_valid
+    |> elem(1)
     |> Board.place_marker(game.board, game.current_player.marker)
   end
 

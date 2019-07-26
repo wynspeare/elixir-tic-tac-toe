@@ -10,12 +10,13 @@ defmodule Player do
 
   def set_marker(default) do
     Messages.get(:set_marker?, default)
-      |> Console.get_input()
-      |> set_marker(default)
+    |> Console.get_input()
+    |> set_marker(default)
   end
 
   def set_marker("Y", _) do
-    Messages.get(:get_marker) |> Console.get_input()
+    Messages.get(:get_marker)
+    |> Console.get_input()
   end
 
   def set_marker(_, default) do

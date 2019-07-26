@@ -5,7 +5,7 @@ defmodule RunnerTest do
 
   test "when user selects Y to start new game a welcome message is shown" do
     fn ->
-      assert capture_io(Runner.run("Y")) == 
+      assert capture_io(Runner.run("Y")) ==
         "You have started a new game of TTT!\n\n
         HOW TO PLAY\n
         ===========\n

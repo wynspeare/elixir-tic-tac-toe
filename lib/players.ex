@@ -1,5 +1,5 @@
 defmodule Players do
-  def build() do
+  def build do
     Console.display("Player 1––")
     player_1 = Player.build("X")
     Console.display("Player 2––")
