@@ -1,8 +1,4 @@
 defmodule TTT do
-  def start_new_game(user_answer) do
-    Validator.check_user_input(user_answer)
-  end
-
   def get_current_move(game) do
     game.current_player.marker
     |> Player.move()

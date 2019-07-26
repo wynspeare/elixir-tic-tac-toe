@@ -12,4 +12,13 @@ defmodule Game do
       current_player: player_1
     }
   end
+
+  def loop(game) do
+    Console.display_board(game.board)
+
+    unless Board.is_filled(game.board) do
+      TTT.turn(game)
+      |> loop()
+    end
+  end
 end
