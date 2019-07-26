@@ -38,22 +38,25 @@ defmodule Runner do
   end
 
   def get_markers() do
-    :default_markers
-    |> Messages.get()
-    |> Console.get_input()
-    |> use_default_markers?()
-  end
-
-  def use_default_markers?("Y") do
-    :show_default_markers |> Messages.get() |> Console.display()
     {"X", "O"}
+    |> show_markers()
   end
 
-  def use_default_markers?("N") do
+  def show_markers(markers) do
+    Messages.get(:show_markers, elem(markers, 0), elem(markers, 1)) |> Console.display()
+    markers
+  end
+
+  def use_default_markers("Y") do
+    {"X", "O"}
+    |> show_markers()
+  end
+
+  def use_default_markers("N") do
     :get_marker |> Messages.get() |> Console.get_input()
   end
 
-  def use_default_markers?(_) do
+  def use_default_markers(_) do
     choose_again()
     get_markers()
   end
