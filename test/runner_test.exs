@@ -3,15 +3,6 @@ defmodule RunnerTest do
 
   import ExUnit.CaptureIO
 
-  test "when user selects Y to start new game a welcome message is shown" do
-    response = fn ->
-      assert Runner.begin_game("Y") == :ok
-    end
-
-    assert capture_io(response) ==
-             "You have started a new game of TTT!\n\nHOW TO PLAY\n===========\nPlayers alternate placing different markers on the board until either one player has three in a row, horizontally, vertically, or diagonally; or all nine squares are filled.\nIf a player is able to draw three of their markers in a row, then that player wins.\n\n"
-  end
-
   test "when user selects N to start new game a goodbye message is shown" do
     response = fn ->
       assert Runner.begin_game("N") == :ok
@@ -22,10 +13,27 @@ defmodule RunnerTest do
 
   test "user can choose default markers" do
     response = fn ->
-      assert Runner.use_default_markers?("Y") == :ok
+      assert Runner.use_default_markers("Y") == {"X", "O"}
     end
 
     assert capture_io(response) ==
-             "Great!\n\nPlayer One - Your marker is \"X\".\nPlayer Two - Your marker is \"O\".\n\n"
+             "Let's begin!\n\nPlayer One - Your marker is \"X\".\nPlayer Two - Your marker is \"O\".\n\n"
+  end
+
+  test "user can see the player's markers" do
+    response = fn ->
+      assert Runner.show_markers({"X", "O"}) == {"X", "O"}
+    end
+
+    assert capture_io(response) ==
+             "Let's begin!\n\nPlayer One - Your marker is \"X\".\nPlayer Two - Your marker is \"O\".\n\n"
+  end
+
+  test "user can be prompted to choose again" do
+    response = fn ->
+      assert Runner.choose_again() == :ok
+    end
+
+    assert capture_io(response) == "Please enter Y/N only\n"
   end
 end
