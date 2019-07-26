@@ -7,13 +7,7 @@ defmodule Runner do
     :start_game
     |> Messages.get()
     |> Console.get_input()
-    |> TTT.start_new_game()
     |> begin_game()
-
-    get_markers()
-    |> Players.build()
-    |> Game.build()
-    |> game_loop()
   end
 
   def game_loop(game) do
@@ -27,6 +21,11 @@ defmodule Runner do
 
   def begin_game("Y") do
     :welcome |> Messages.get() |> Console.display()
+
+    get_markers()
+    |> Players.build()
+    |> Game.build()
+    |> game_loop()
   end
 
   def begin_game("N") do

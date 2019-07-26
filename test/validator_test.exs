@@ -21,6 +21,10 @@ defmodule ValidatorTest do
     assert Validator.is_numerical_location("*") == {false, "*"}
   end
 
+  test "a user cannot just hit enter when entering a chosen move" do
+    assert Validator.is_numerical_location("") == {false, ""}
+  end
+
   test "is_valid_move returns tuple with true and integer location if cell is empty" do
     board = [1, 2, "X", 4, 5, "O", "O", "O", 9]
     assert Validator.is_valid_move("2", board) == {true, 2}

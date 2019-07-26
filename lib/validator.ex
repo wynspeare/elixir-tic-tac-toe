@@ -1,10 +1,6 @@
 defmodule Validator do
-  def check_user_input(user_answer) do
-    case {:ok, user_answer} do
-      {:ok, "Y"} -> "Y"
-      {:ok, "N"} -> "N"
-      _ -> false
-    end
+  def check_user_input("Y") do
+    true
   end
 
   def convert_input({is_integer, location}) when is_integer == true do
@@ -13,6 +9,10 @@ defmodule Validator do
 
   def convert_input({false, location}) do
     {false, location}
+  end
+
+  def is_numerical_location("") do
+    {false, ""}
   end
 
   def is_numerical_location(input) do
