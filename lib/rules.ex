@@ -2,7 +2,15 @@ defmodule Rules do
   def is_won(board, marker) do
     board
     |> get_combos()
-    |> check_sections(marker)
+    |> check_combos(marker)
+  end
+
+  def is_draw(board, marker) do
+    Board.is_filled(board) and not is_won(board, marker)
+  end
+
+  def is_over(board, marker) do
+    is_draw(board, marker) or is_won(board, marker)
   end
 
   def is_winning_combo(cells, marker) do
@@ -13,7 +21,7 @@ defmodule Rules do
     round(:math.sqrt(Kernel.length(board)))
   end
 
-  def check_sections(sectioned_board, marker) do
+  def check_combos(sectioned_board, marker) do
     Enum.any?(sectioned_board, fn cells -> is_winning_combo(cells, marker) end)
   end
 
