@@ -8,7 +8,8 @@ defmodule Messages do
       goodbye: "Okay, Goodbye!",
       default_markers: "Do you want to use the standard markers - X and O?\n",
       get_marker: "Okay no problem! Please enter a marker for player one:\n",
-      cell_filled: "That cell is filled please choose an empty location."
+      cell_filled: "That cell is filled please choose an empty location.",
+      draw: "This game is a draw."
     }
 
     messages[term]
@@ -17,7 +18,8 @@ defmodule Messages do
   def get(term, value) do
     messages = %{
       get_move: "Player #{value} it is your turn. Please select a cell 1 - 9:\n",
-      invalid_move: "\" #{value} \" is not a number, please enter 1 - 9."
+      invalid_move: "\" #{value} \" is not a number, please enter 1 - 9.",
+      winner: "#{value} is the WINNER!!",
     }
 
     messages[term]

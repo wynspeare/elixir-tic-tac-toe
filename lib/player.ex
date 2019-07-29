@@ -11,4 +11,3 @@ defmodule Player do
   end
 end
 
-# capture_IO("1", move("X"))

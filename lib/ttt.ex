@@ -27,9 +27,14 @@ defmodule TTT do
 
   def turn(game) do
     board = get_current_move(game)
-    player = TTT.switch_player(game.current_player.marker, game)
-    %{game | board: board, current_player: player}
+    if Rules.is_over(board, game.current_player.marker) do
+      {Rules.is_draw(board, game.current_player.marker), %{game | board: board}}
+    else
+      player = TTT.switch_player(game.current_player.marker, game)
+      %{game | board: board, current_player: player}
+    end
   end
+
 
   def switch_player(current_player_marker, game) do
     if current_player_marker == game.player_one.marker do
