@@ -10,4 +10,3 @@ defmodule Player do
     |> Console.get_input()
   end
 end
-

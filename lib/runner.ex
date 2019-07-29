@@ -10,19 +10,19 @@ defmodule Runner do
     |> begin_game()
   end
 
+  def game_loop({true, game}) do
+    Console.display_board(game.board)
+    :draw |> Messages.get() |> Console.display()
+  end
 
-    def game_loop({true, game}) do
-      Console.display_board(game.board)
-      :draw |> Messages.get() |> Console.display()
-    end
-
-    def game_loop({false, game}) do
-      Console.display_board(game.board)
-      :winner |> Messages.get(game.current_player.marker) |> Console.display()
-    end
+  def game_loop({false, game}) do
+    Console.display_board(game.board)
+    :winner |> Messages.get(game.current_player.marker) |> Console.display()
+  end
 
   def game_loop(game) do
     Console.display_board(game.board)
+
     unless Board.is_filled(game.board) do
       TTT.turn(game)
       |> game_loop()
