@@ -5,8 +5,7 @@ defmodule Player do
     %Player{marker: marker}
   end
 
-  def move(marker) do
-    Messages.get(:get_move, marker)
-    |> Console.get_input()
+  def move(marker, io \\ IO) do
+    TTT.get_input(:get_move, marker, io)
   end
 end

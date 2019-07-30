@@ -33,12 +33,17 @@ defmodule ConsoleTest do
   end
 
   test "user can enter y input and it is accepted and capitalized" do
-    output = fn -> Console.get_input(Messages.get(:start_game)) |> IO.write() end
+    output = fn -> Console.get_input(Messages.get(:start_game), IO) |> IO.write() end
     assert capture_io([input: "y", capture_prompt: false], output) == "Y"
   end
 
   test "user is prompted to try again if they enter an invalid response" do
-    output = fn -> Console.get_input(nil, Messages.get(:start_game)) end
+    output = fn -> Console.get_input(nil, Messages.get(:start_game), IO) end
     assert capture_io("!", output) =~ "Try again.\n"
+  end
+
+  test "Using FakeIO user can enter y input and it is accepted and capitalized" do
+    output = fn -> Console.get_input(Messages.get(:start_game), FakeIO) |> IO.write() end
+    assert capture_io(output) == "Y"
   end
 end

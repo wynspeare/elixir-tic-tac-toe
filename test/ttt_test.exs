@@ -52,4 +52,10 @@ defmodule TTTTest do
     assert capture_io([input: "&\n1", capture_prompt: false], output) ==
              "\" & \" is not a number, please enter 1 - 9.\n"
   end
+
+
+  test "get_input displays a message to the console and prompts the user for input" do
+    output = fn -> TTT.get_input(:get_move, "X", FakeIO) |> IO.write end
+    assert capture_io(output) == "1"
+  end
 end

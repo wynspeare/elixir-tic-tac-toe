@@ -1,17 +1,17 @@
 defmodule Console do
-  def get_input(message) do
+  def get_input(message, io \\ IO) do
     message
-    |> IO.gets()
+    |> io.gets()
     |> String.trim()
     |> String.first()
-    |> get_input(message)
+    |> get_input(message, io)
   end
 
-  def get_input(nil, _) do
-    get_input("Try again.\n")
+  def get_input(nil, _, io) do
+    get_input("Try again.\n", io)
   end
 
-  def get_input(message, _) do
+  def get_input(message, _, _io) do
     String.capitalize(message)
   end
 

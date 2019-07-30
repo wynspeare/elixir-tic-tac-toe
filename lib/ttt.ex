@@ -43,4 +43,9 @@ defmodule TTT do
       game.player_one
     end
   end
+
+  def get_input(message, marker, io \\ IO) do
+    Messages.get(message, marker)
+    |> Console.get_input(io)
+  end
 end

@@ -62,15 +62,6 @@ defmodule Runner do
     |> show_markers()
   end
 
-  def use_default_markers("N") do
-    :get_marker |> Messages.get() |> Console.get_input()
-  end
-
-  def use_default_markers(_) do
-    choose_again()
-    get_markers()
-  end
-
   def choose_again() do
     :choose_again |> Messages.get() |> Console.display()
   end
