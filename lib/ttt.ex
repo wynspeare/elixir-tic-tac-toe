@@ -1,7 +1,8 @@
 defmodule TTT do
   def get_current_move(game) do
     game.current_player.marker
-    |> Player.move()
+    # |> game.current_player.move(game.board)
+    |> Player.move(game.current_player, game.board)
     |> Validator.is_valid_move(game.board)
     |> get_current_move(game)
   end
