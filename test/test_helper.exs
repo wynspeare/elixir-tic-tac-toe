@@ -1,6 +1,5 @@
 ExUnit.start()
 
-
 defmodule FakeIO do
   def gets("Do you want to play Tic Tac Toe?\n"), do: "Y"
   def gets("Try again.\n"), do: "!"

@@ -30,7 +30,9 @@ defmodule Messages do
       show_markers:
         "Let's begin!\n\nPlayer One - Your marker is \"#{value_1}\".\nPlayer Two - Your marker is \"#{
           value_2
-        }\".\n"
+        }\".\n",
+      show_move: "Player \"#{value_1}\" selected space #{value_2}."
+
     }
 
     messages[term]
