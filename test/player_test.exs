@@ -9,7 +9,6 @@ defmodule PlayerTest do
     assert capture_io("1", output) == "Player X it is your turn. Please select a cell 1 - 9:\n1"
   end
 
-
   test "using FakeIO move takes in a marker and asks a player for their selected move" do
     output = fn -> Player.move("X", FakeIO) |> IO.write() end
 
