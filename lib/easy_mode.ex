@@ -1,8 +1,8 @@
-defmodule Easy do
+defmodule Easy_Mode do
   defstruct [:player, :marker]
 
   def build(marker) do
-    %Easy{marker: marker}
+    %Easy_Mode{marker: marker}
   end
 
   def get_random_move(_marker, board) do

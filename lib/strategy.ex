@@ -12,7 +12,7 @@ defimpl Strategy, for: Easy do
 
   def decide(easy, board) do
     easy.marker
-    |> Easy.get_random_move(board)
+    |> Easy_Mode.get_random_move(board)
   end
 end
 

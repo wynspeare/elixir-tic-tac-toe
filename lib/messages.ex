@@ -19,7 +19,7 @@ defmodule Messages do
     messages = %{
       get_move: "Player #{value} it is your turn. Please select a cell 1 - 9:\n",
       invalid_move: "\" #{value} \" is not a number, please enter 1 - 9.",
-      winner: "#{value} is the WINNER!!",
+      winner: "#{value} is the WINNER!!"
     }
 
     messages[term]
@@ -32,7 +32,6 @@ defmodule Messages do
           value_2
         }\".\n",
       show_move: "Player \"#{value_1}\" selected space #{value_2}."
-
     }
 
     messages[term]

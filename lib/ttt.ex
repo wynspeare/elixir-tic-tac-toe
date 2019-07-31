@@ -47,7 +47,8 @@ defmodule TTT do
 
   def display_move(cell_location, marker) do
     Messages.get(:show_move, marker, cell_location)
-    |> Console.display
+    |> Console.display()
+
     cell_location
   end
 
