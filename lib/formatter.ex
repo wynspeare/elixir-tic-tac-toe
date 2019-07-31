@@ -15,11 +15,6 @@ defmodule Formatter do
     Enum.chunk_every(board, combo_length)
   end
 
-
-  # def get_rows(board) do
-  #   Enum.chunk_every(board, round(:math.sqrt(Kernel.length(board))))
-  # end
-
   def get_columns(board, combo_length) do
     [Enum.take_every(board, combo_length)]
     |> get_columns(board, combo_length)
