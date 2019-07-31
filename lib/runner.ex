@@ -29,11 +29,32 @@ defmodule Runner do
     end
   end
 
+  def single_player_game() do
+    :single_player
+    |> Messages.get()
+    |> Console.get_input()
+    |> single_player_game()
+  end
+
+  def single_player_game("Y") do
+    get_markers()
+    |> Players.build(true)
+  end
+
+  def single_player_game("N") do
+    get_markers()
+    |> Players.build()
+  end
+
+  def single_player_game(_) do
+    choose_again()
+    single_player_game()
+  end
+
   def begin_game("Y") do
     :welcome |> Messages.get() |> Console.display()
 
-    get_markers()
-    |> Players.build()
+    single_player_game()
     |> Game.build()
     |> game_loop()
   end

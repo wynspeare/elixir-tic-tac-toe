@@ -1,5 +1,5 @@
 defmodule Easy_Mode do
-  defstruct [:player, :marker]
+  defstruct [:marker]
 
   def build(marker) do
     %Easy_Mode{marker: marker}

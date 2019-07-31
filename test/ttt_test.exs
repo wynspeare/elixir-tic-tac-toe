@@ -7,11 +7,11 @@ defmodule TTTTest do
     game = %Game{
       board: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       player_one: %Human{marker: "X"},
-      player_two: %Human{marker: "O"},
+      player_two: %Easy_Mode{marker: "O"},
       current_player: %Human{marker: "X"}
     }
 
-    assert TTT.switch_player("X", game) == %Human{marker: "O"}
+    assert TTT.switch_player("X", game) == %Easy_Mode{marker: "O"}
   end
 
   test "get_current_move returns an updated board when a valid move is passed in" do
@@ -47,7 +47,7 @@ defmodule TTTTest do
     game = %Game{
       board: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       player_one: %Human{marker: "X"},
-      player_two: %Human{marker: "O"},
+      player_two: %Easy_Mode{marker: "O"},
       current_player: %Human{marker: "X"}
     }
 

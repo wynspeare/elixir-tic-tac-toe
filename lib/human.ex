@@ -1,5 +1,5 @@
 defmodule Human do
-  defstruct [:player, :marker]
+  defstruct [:marker]
 
   def build(marker) do
     %Human{marker: marker}
