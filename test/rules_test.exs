@@ -1,56 +1,6 @@
 defmodule RulesTest do
   use ExUnit.Case
 
-  test "a board of 9 cells has a winning combo length of 3" do
-    board = [1, 2, "X", 4, 5, "X", 7, "O", "X"]
-    assert Rules.get_combo_length(board) == 3
-  end
-
-  test "a board of 16 cells has a winning combo length of 4" do
-    board = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-    assert Rules.get_combo_length(board) == 4
-  end
-
-  test "a 9 element board can be split into column combos" do
-    assert Rules.get_columns([1, "X", 3, 4, 5, 6, "O", "X", 9], 3) == [
-             [1, 4, "O"],
-             ["X", 5, "X"],
-             [3, 6, 9]
-           ]
-  end
-
-  test "a 16 element board can be split into column combos" do
-    assert Rules.get_columns([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], 4) == [
-             [1, 5, 9, 13],
-             [2, 6, 10, 14],
-             [3, 7, 11, 15],
-             [4, 8, 12, 16]
-           ]
-  end
-
-  test "a 9 element board can be split into diagonal combos" do
-    assert Rules.get_diagonals([1, 2, 3, 4, 5, 6, 7, 8, 9], 3) == [
-             [1, 5, 9],
-             [3, 5, 7]
-           ]
-  end
-
-  test "a 16 element board can be split into diagonal combos" do
-    assert Rules.get_diagonals([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], 4) == [
-             [1, 6, 11, 16],
-             [4, 7, 10, 13]
-           ]
-  end
-
-  test "a 16 element board can be split into horizontal combos" do
-    assert Formatter.split_into_rows([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]) == [
-             [1, 2, 3, 4],
-             [5, 6, 7, 8],
-             [9, 10, 11, 12],
-             [13, 14, 15, 16]
-           ]
-  end
-
   test "take in a board of nine elements zero and extract any winning combos" do
     board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
