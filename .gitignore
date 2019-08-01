@@ -23,3 +23,7 @@ erl_crash.dump
 tic_tac_toe-*.tar
 
 /.elixir_ls
+
+/.vscode
+
+tic_tac_toe
