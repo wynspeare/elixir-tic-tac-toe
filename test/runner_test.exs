@@ -36,4 +36,30 @@ defmodule RunnerTest do
 
     assert capture_io(response) == "Please enter Y/N only\n"
   end
+
+  test "user can only enter Y/N to begin a new game" do
+    output = fn -> Runner.begin_game("&") end
+
+    assert capture_io([input: "%\n#\nn", capture_prompt: false], output) =~
+             "Please enter Y/N only\n"
+  end
+
+  test "user can enter N input and not start a game" do
+    output = fn -> Runner.start_game() end
+    assert capture_io([input: "N", capture_prompt: false], output) == "Okay, Goodbye!\n"
+  end
+
+  test "user play a game until won" do
+    output = fn -> Runner.start_game() end
+
+    assert capture_io([input: "Y\n1\n2\n3\n4\n5\n6\n7", capture_prompt: false], output) =~
+             "X is the WINNER!!\n"
+  end
+
+  test "user play a game until drawn" do
+    output = fn -> Runner.start_game() end
+
+    assert capture_io([input: "Y\n1\n2\n3\n5\n4\n7\n8\n9\n6", capture_prompt: false], output) =~
+             "This game is a draw.\n"
+  end
 end

@@ -10,6 +10,16 @@ defmodule Runner do
     |> begin_game()
   end
 
+  def game_loop({true, game}) do
+    Console.display_board(game.board)
+    :draw |> Messages.get() |> Console.display()
+  end
+
+  def game_loop({false, game}) do
+    Console.display_board(game.board)
+    :winner |> Messages.get(game.current_player.marker) |> Console.display()
+  end
+
   def game_loop(game) do
     Console.display_board(game.board)
 
@@ -50,15 +60,6 @@ defmodule Runner do
   def use_default_markers("Y") do
     {"X", "O"}
     |> show_markers()
-  end
-
-  def use_default_markers("N") do
-    :get_marker |> Messages.get() |> Console.get_input()
-  end
-
-  def use_default_markers(_) do
-    choose_again()
-    get_markers()
   end
 
   def choose_again() do
