@@ -8,7 +8,6 @@ defmodule Messages do
         "You have started a new game of TTT!\n\nHOW TO PLAY\n===========\nPlayers alternate placing different markers on the board until either one player has three in a row, horizontally, vertically, or diagonally; or all nine squares are filled.\nIf a player is able to draw three of their markers in a row, then that player wins.\n",
       goodbye: "Okay, Goodbye!",
       default_markers: "Do you want to use the standard markers - X and O?\n",
-      get_marker: "Okay no problem! Please enter a marker for player one:\n",
       cell_filled: "That cell is filled please choose an empty location.",
       draw: "This game is a draw."
     }
@@ -20,7 +19,9 @@ defmodule Messages do
     messages = %{
       get_move: "Player #{value} it is your turn. Please select a cell 1 - 9:\n",
       invalid_move: "\" #{value} \" is not a number, please enter 1 - 9.",
-      winner: "#{value} is the WINNER!!"
+      winner: "#{value} is the WINNER!!",
+      get_marker: "Please enter a marker for Player #{value}:\n",
+
     }
 
     messages[term]

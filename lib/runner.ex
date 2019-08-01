@@ -69,7 +69,12 @@ defmodule Runner do
   end
 
   def get_markers() do
-    {"X", "O"}
+    :default_markers |> Messages.get() |> Console.get_input()
+    |> use_default_markers
+  end
+
+  def get_markers(marker_1) do
+    {marker_1, :get_marker |> Messages.get("Two") |> Console.get_input()}
     |> show_markers()
   end
 
@@ -81,6 +86,16 @@ defmodule Runner do
   def use_default_markers("Y") do
     {"X", "O"}
     |> show_markers()
+  end
+
+  def use_default_markers("N") do
+    :get_marker |> Messages.get("One") |> Console.get_input()
+    |> get_markers
+  end
+
+  def use_default_markers(_) do
+    choose_again()
+    get_markers()
   end
 
   def choose_again() do
