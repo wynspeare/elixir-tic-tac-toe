@@ -50,7 +50,10 @@ defmodule RunnerTest do
   test "user can play a two player game until drawn" do
     output = fn -> Runner.start_game() end
 
-    assert capture_io([input: "Y\nn\ny\n1\n2\n3\n5\n4\n7\n8\n9\n6", capture_prompt: false], output) =~
+    assert capture_io(
+             [input: "Y\nn\ny\n1\n2\n3\n5\n4\n7\n8\n9\n6", capture_prompt: false],
+             output
+           ) =~
              "This game is a draw.\n"
   end
 
@@ -71,7 +74,10 @@ defmodule RunnerTest do
   test "user can play a single player game" do
     output = fn -> Runner.start_game() end
 
-    assert capture_io([input: "Y\nY\nY\n1\n2\n3\n4\n5\n6\n7\n8\n9", capture_prompt: false], output) =~
+    assert capture_io(
+             [input: "Y\nY\nY\n1\n2\n3\n4\n5\n6\n7\n8\n9", capture_prompt: false],
+             output
+           ) =~
              "You have started a new game of TTT!\n"
   end
 
@@ -100,6 +106,19 @@ defmodule RunnerTest do
 
   test "when get_markers is passed a custom marker it gets the second marker" do
     output = fn -> Runner.get_markers("+") end
-    assert capture_io([input: "@", capture_prompt: false], output) == "Let's begin!\n\nPlayer One - Your marker is \"+\".\nPlayer Two - Your marker is \"@\".\n\n"
+
+    assert capture_io([input: "@", capture_prompt: false], output) ==
+             "Let's begin!\n\nPlayer One - Your marker is \"+\".\nPlayer Two - Your marker is \"@\".\n\n"
+  end
+
+  test "users cannot choose two of the same custom markers" do
+    output = fn -> Runner.different_markers?({"+", "+"}) end
+
+    assert capture_io([input: "@", capture_prompt: false], output) ==
+             "Choose a different symbol - they cannot be the same!\nLet's begin!\n\nPlayer One - Your marker is \"+\".\nPlayer Two - Your marker is \"@\".\n\n"
+  end
+
+  test "different_markers? returns the markers when they are different" do
+    assert Runner.different_markers?({"+", "^"}) == {"+", "^"}
   end
 end

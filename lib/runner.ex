@@ -69,12 +69,15 @@ defmodule Runner do
   end
 
   def get_markers() do
-    :default_markers |> Messages.get() |> Console.get_input()
+    :default_markers
+    |> Messages.get()
+    |> Console.get_input()
     |> use_default_markers
   end
 
   def get_markers(marker_1) do
     {marker_1, :get_marker |> Messages.get("Two") |> Console.get_input()}
+    |> different_markers?()
     |> show_markers()
   end
 
@@ -83,13 +86,24 @@ defmodule Runner do
     markers
   end
 
+  def different_markers?({marker_1, marker_2}) do
+    if marker_1 == marker_2 do
+      :different_markers |> Messages.get() |> Console.display()
+      get_markers(marker_1)
+    else
+      {marker_1, marker_2}
+    end
+  end
+
   def use_default_markers("Y") do
     {"X", "O"}
     |> show_markers()
   end
 
   def use_default_markers("N") do
-    :get_marker |> Messages.get("One") |> Console.get_input()
+    :get_marker
+    |> Messages.get("One")
+    |> Console.get_input()
     |> get_markers
   end
 

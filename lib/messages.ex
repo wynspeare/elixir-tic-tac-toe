@@ -9,7 +9,8 @@ defmodule Messages do
       goodbye: "Okay, Goodbye!",
       default_markers: "Do you want to use the standard markers - X and O?\n",
       cell_filled: "That cell is filled please choose an empty location.",
-      draw: "This game is a draw."
+      draw: "This game is a draw.",
+      different_markers: "Choose a different symbol - they cannot be the same!"
     }
 
     messages[term]
@@ -20,8 +21,7 @@ defmodule Messages do
       get_move: "Player #{value} it is your turn. Please select a cell 1 - 9:\n",
       invalid_move: "\" #{value} \" is not a number, please enter 1 - 9.",
       winner: "#{value} is the WINNER!!",
-      get_marker: "Please enter a marker for Player #{value}:\n",
-
+      get_marker: "Please enter a marker for Player #{value}:\n"
     }
 
     messages[term]
