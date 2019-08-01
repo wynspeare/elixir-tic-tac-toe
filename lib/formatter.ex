@@ -11,7 +11,7 @@ defmodule Formatter do
     round(:math.sqrt(Kernel.length(board)))
   end
 
-    def get_rows(board, combo_length) do
+  def get_rows(board, combo_length) do
     Enum.chunk_every(board, combo_length)
   end
 

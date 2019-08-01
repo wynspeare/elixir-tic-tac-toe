@@ -24,7 +24,6 @@ defmodule FormatterTest do
     assert Formatter.get_combo_length(board) == 4
   end
 
-
   test "a 9 element board can be split into column combos" do
     assert Formatter.get_columns([1, "X", 3, 4, 5, 6, "O", "X", 9], 3) == [
              [1, 4, "O"],
@@ -50,10 +49,11 @@ defmodule FormatterTest do
   end
 
   test "a 16 element board can be split into diagonal combos" do
-    assert Formatter.get_diagonals([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], 4) == [
-             [1, 6, 11, 16],
-             [4, 7, 10, 13]
-           ]
+    assert Formatter.get_diagonals([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], 4) ==
+             [
+               [1, 6, 11, 16],
+               [4, 7, 10, 13]
+             ]
   end
 
   test "split_into_rows takes a list of 9 elements returns a chunked list of 3 rows" do
