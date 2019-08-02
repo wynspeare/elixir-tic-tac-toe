@@ -1,4 +1,12 @@
 defmodule Formatter do
+  def format_cell(cell) when is_integer(cell) do
+    "| " <> Kernel.inspect(cell) <> " "
+  end
+
+  def format_cell(cell) do
+    "| " <> cell <> " "
+  end
+
   def format_cells([]) do
     []
   end
@@ -43,14 +51,6 @@ defmodule Formatter do
     |> Enum.take_every(combo_length - 1)
     |> Enum.take(combo_length)
     |> get_diagonals(chunk)
-  end
-
-  def format_cell(cell) when is_integer(cell) do
-    "| " <> Kernel.inspect(cell) <> " "
-  end
-
-  def format_cell(cell) do
-    "| " <> cell <> " "
   end
 
   def add_row_dividers([head | tail]) do
