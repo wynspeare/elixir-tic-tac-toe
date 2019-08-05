@@ -1,7 +1,7 @@
 defmodule TTT do
   def get_current_move(game) do
-    game.current_player.marker
-    |> Player.move()
+    game.current_player
+    |> Strategy.decide(game.board)
     |> Validator.is_valid_move(game.board)
     |> get_current_move(game)
   end
@@ -22,6 +22,7 @@ defmodule TTT do
 
   def get_current_move(is_valid, game) do
     elem(is_valid, 1)
+    |> display_move(game.current_player.marker)
     |> Board.place_marker(game.board, game.current_player.marker)
   end
 
@@ -42,6 +43,13 @@ defmodule TTT do
     else
       game.player_one
     end
+  end
+
+  def display_move(cell_location, marker) do
+    Messages.get(:show_move, marker, cell_location)
+    |> Console.display()
+
+    cell_location
   end
 
   def get_input(message, marker, io \\ IO) do

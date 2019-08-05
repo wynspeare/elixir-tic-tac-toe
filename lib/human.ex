@@ -1,11 +1,11 @@
-defmodule Player do
+defmodule Human do
   defstruct [:marker]
 
   def build(marker) do
-    %Player{marker: marker}
+    %Human{marker: marker}
   end
 
-  def move(marker, io \\ IO) do
+  def get_move(marker, _board, io \\ IO) do
     TTT.get_input(:get_move, marker, io)
   end
 end

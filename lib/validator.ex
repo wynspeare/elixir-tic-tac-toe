@@ -15,6 +15,11 @@ defmodule Validator do
     {String.match?(input, ~r/^[0-9]*$/), input}
   end
 
+  def is_valid_move(cell, board) when is_integer(cell) do
+    cell
+    |> Board.is_cell_empty(board)
+  end
+
   def is_valid_move(cell, board) do
     is_numerical_location(cell)
     |> convert_input()
