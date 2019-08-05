@@ -1,6 +1,6 @@
 defmodule FormatterTest do
   use ExUnit.Case
-  doctest TTT
+  # doctest TTT
 
   test "format empty cell adds a pipe and spaces" do
     assert(Formatter.format_cell(1) == "| 1 ")

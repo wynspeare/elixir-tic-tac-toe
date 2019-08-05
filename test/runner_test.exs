@@ -1,30 +1,6 @@
 defmodule RunnerTest do
   use ExUnit.Case
-
   import ExUnit.CaptureIO
-
-  test "when user selects N to start new game a goodbye message is shown" do
-    response = fn ->
-      assert Runner.begin_game("N") == :ok
-    end
-
-    assert capture_io(response) == "Okay, Goodbye!\n"
-  end
-
-  test "user can be prompted to choose again" do
-    response = fn ->
-      assert Runner.choose_again() == :ok
-    end
-
-    assert capture_io(response) == "Please enter Y/N only\n"
-  end
-
-  test "user can only enter Y/N to begin a new game" do
-    output = fn -> Runner.begin_game("&") end
-
-    assert capture_io([input: "%\n#\nn", capture_prompt: false], output) =~
-             "Please enter Y/N only\n"
-  end
 
   test "user can enter N input and not start a game" do
     output = fn -> Runner.start_game() end

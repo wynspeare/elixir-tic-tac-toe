@@ -1,7 +1,6 @@
 defmodule ConsoleTest do
   use ExUnit.Case
   alias Messages
-  doctest TTT
 
   import ExUnit.CaptureIO
 

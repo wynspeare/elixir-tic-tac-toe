@@ -1,4 +1,27 @@
-defmodule Options do
+defmodule Configuration do
+
+  def build_game("Y") do
+    :welcome |> Messages.get() |> Console.display()
+
+    single_player_game()
+    |> Game.build()
+    |> Controller.game_loop()
+  end
+
+  def build_game("N") do
+    :goodbye |> Messages.get() |> Console.display()
+  end
+
+  def build_game(_) do
+    choose_again()
+    Runner.start_game()
+  end
+
+  def choose_again() do
+    :choose_again |> Messages.get() |> Console.display()
+  end
+
+
   def single_player_game() do
     :single_player
     |> Messages.get()
@@ -7,17 +30,17 @@ defmodule Options do
   end
 
   def single_player_game("Y") do
-    Options.get_markers()
+    get_markers()
     |> Players.build(true)
   end
 
   def single_player_game("N") do
-    Options.get_markers()
+    get_markers()
     |> Players.build()
   end
 
   def single_player_game(_) do
-    Runner.choose_again()
+    choose_again()
     single_player_game()
   end
 
@@ -61,7 +84,7 @@ defmodule Options do
   end
 
   def use_default_markers(_) do
-    Runner.choose_again()
+    choose_again()
     get_markers()
   end
 end
