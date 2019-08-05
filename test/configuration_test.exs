@@ -26,7 +26,6 @@ defmodule ConfigurationTest do
              "Please enter Y/N only\n"
   end
 
-
   test "user can see the player's markers" do
     response = fn ->
       assert Configuration.show_markers({"X", "O"}) == {"X", "O"}
@@ -39,20 +38,20 @@ defmodule ConfigurationTest do
   test "user can enter Y to play a single player game" do
     output = fn -> Configuration.single_player_game() end
 
-    assert capture_io([input: "Y\nY", capture_prompt: false], output) =~
+    assert capture_io([input: "Y\nN", capture_prompt: false], output) =~
              "Let's begin!\n\nPlayer One - Your marker is \"X\".\nPlayer Two - Your marker is \"O\".\n\n"
   end
 
   test "user can only enter Y/N to play a single player game" do
     output = fn -> Configuration.single_player_game("*") end
 
-    assert capture_io([input: "@\nY\nY", capture_prompt: false], output) =~
+    assert capture_io([input: "@\nY\nn", capture_prompt: false], output) =~
              "Please enter Y/N only\n"
   end
 
   test "user can choose default markers" do
     response = fn ->
-      assert Configuration.use_default_markers("Y") == {"X", "O"}
+      assert Configuration.use_custom_markers("N") == {"X", "O"}
     end
 
     assert capture_io(response) ==
@@ -60,16 +59,16 @@ defmodule ConfigurationTest do
   end
 
   test "user can choose custom markers" do
-    response = fn -> Configuration.use_default_markers("N") end
+    response = fn -> Configuration.use_custom_markers("Y") end
 
     assert capture_io([input: "+\n#"], response) =~
              "Please enter a marker for Player One:\n"
   end
 
-  test "user cannot enter anything other than Y/N when prompted to use default markers" do
-    response = fn -> Configuration.use_default_markers("%") end
+  test "user cannot enter anything other than Y/N when prompted to use custom markers" do
+    response = fn -> Configuration.use_custom_markers("%") end
 
-    assert capture_io([input: "y"], response) =~
+    assert capture_io([input: "n"], response) =~
              "Please enter Y/N only\n"
   end
 

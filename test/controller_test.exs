@@ -54,7 +54,7 @@ defmodule ControllerTest do
     output = fn -> Controller.get_current_move(game) end
 
     assert capture_io([input: "&\n1", capture_prompt: false], output) ==
-             "\" & \" is not a number, please enter 1 - 9.\nPlayer \"X\" selected space 1.\n"
+             "\" & \" is not a valid space, please enter 1 - 9.\nPlayer \"X\" selected space 1.\n"
   end
 
   test "get_input displays a message to the console and prompts the user for input" do

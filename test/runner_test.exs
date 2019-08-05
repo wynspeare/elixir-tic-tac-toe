@@ -10,7 +10,7 @@ defmodule RunnerTest do
   test "user can play a two player game until won" do
     output = fn -> Runner.start_game() end
 
-    assert capture_io([input: "Y\nn\ny\n1\n2\n3\n4\n5\n6\n7", capture_prompt: false], output) =~
+    assert capture_io([input: "Y\nn\nn\n1\n2\n3\n4\n5\n6\n7", capture_prompt: false], output) =~
              "X is the WINNER!!\n"
   end
 
@@ -18,7 +18,7 @@ defmodule RunnerTest do
     output = fn -> Runner.start_game() end
 
     assert capture_io(
-             [input: "Y\nn\ny\n1\n2\n3\n5\n4\n7\n8\n9\n6", capture_prompt: false],
+             [input: "Y\nn\nn\n1\n2\n3\n5\n4\n7\n8\n9\n6", capture_prompt: false],
              output
            ) =~
              "This game is a draw.\n"
@@ -28,7 +28,7 @@ defmodule RunnerTest do
     output = fn -> Runner.start_game() end
 
     assert capture_io(
-             [input: "Y\nY\nY\n1\n2\n3\n4\n5\n6\n7\n8\n9", capture_prompt: false],
+             [input: "Y\nY\nn\n1\n2\n3\n4\n5\n6\n7\n8\n9", capture_prompt: false],
              output
            ) =~
              "You have started a new game of TTT!\n"

@@ -1,6 +1,4 @@
 defmodule Controller do
-
-
   def game_loop({true, game}) do
     Console.display_board(game.board)
     :draw |> Messages.get() |> Console.display()
@@ -19,7 +17,6 @@ defmodule Controller do
       |> game_loop()
     end
   end
-
 
   def get_current_move(game) do
     game.current_player
@@ -42,8 +39,8 @@ defmodule Controller do
     get_current_move(game)
   end
 
-  def get_current_move(is_valid, game) do
-    elem(is_valid, 1)
+  def get_current_move({_, valid_move}, game) do
+    valid_move
     |> display_move(game.current_player.marker)
     |> Board.place_marker(game.board, game.current_player.marker)
   end

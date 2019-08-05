@@ -7,5 +7,4 @@ defmodule Runner do
     Controller.get_input(:start_game)
     |> Configuration.build_game()
   end
-
 end

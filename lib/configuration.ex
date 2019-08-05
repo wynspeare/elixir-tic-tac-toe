@@ -1,5 +1,4 @@
 defmodule Configuration do
-
   def build_game("Y") do
     :welcome |> Messages.get() |> Console.display()
 
@@ -20,7 +19,6 @@ defmodule Configuration do
   def choose_again() do
     :choose_again |> Messages.get() |> Console.display()
   end
-
 
   def single_player_game() do
     :single_player
@@ -45,10 +43,10 @@ defmodule Configuration do
   end
 
   def get_markers() do
-    :default_markers
+    :custom_markers
     |> Messages.get()
     |> Console.get_input()
-    |> use_default_markers
+    |> use_custom_markers
   end
 
   def get_markers(marker_1) do
@@ -71,19 +69,19 @@ defmodule Configuration do
     end
   end
 
-  def use_default_markers("Y") do
+  def use_custom_markers("N") do
     {"X", "O"}
     |> show_markers()
   end
 
-  def use_default_markers("N") do
+  def use_custom_markers("Y") do
     :get_marker
     |> Messages.get("One")
     |> Console.get_input()
     |> get_markers
   end
 
-  def use_default_markers(_) do
+  def use_custom_markers(_) do
     choose_again()
     get_markers()
   end
