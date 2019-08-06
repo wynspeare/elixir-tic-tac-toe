@@ -1,4 +1,23 @@
-defmodule TTT do
+defmodule Controller do
+  def game_loop({true, game}) do
+    Console.display_board(game.board)
+    :draw |> Messages.get() |> Console.display()
+  end
+
+  def game_loop({false, game}) do
+    Console.display_board(game.board)
+    :winner |> Messages.get(game.current_player.marker) |> Console.display()
+  end
+
+  def game_loop(game) do
+    Console.display_board(game.board)
+
+    unless Board.is_filled(game.board) do
+      turn(game)
+      |> game_loop()
+    end
+  end
+
   def get_current_move(game) do
     game.current_player
     |> Strategy.decide(game.board)
@@ -20,8 +39,8 @@ defmodule TTT do
     get_current_move(game)
   end
 
-  def get_current_move(is_valid, game) do
-    elem(is_valid, 1)
+  def get_current_move({_, valid_move}, game) do
+    valid_move
     |> display_move(game.current_player.marker)
     |> Board.place_marker(game.board, game.current_player.marker)
   end
@@ -32,7 +51,7 @@ defmodule TTT do
     if Rules.is_over(board, game.current_player.marker) do
       {Rules.is_draw(board, game.current_player.marker), %{game | board: board}}
     else
-      player = TTT.switch_player(game.current_player.marker, game)
+      player = Controller.switch_player(game.current_player.marker, game)
       %{game | board: board, current_player: player}
     end
   end
@@ -55,5 +74,10 @@ defmodule TTT do
   def get_input(message, marker, io \\ IO) do
     Messages.get(message, marker)
     |> Console.get_input(io)
+  end
+
+  def get_input(message) do
+    Messages.get(message)
+    |> Console.get_input()
   end
 end

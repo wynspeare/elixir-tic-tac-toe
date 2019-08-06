@@ -1,6 +1,6 @@
-defmodule TTTTest do
+defmodule ControllerTest do
   use ExUnit.Case
-  doctest TTT
+  doctest Controller
   import ExUnit.CaptureIO
 
   test "switch_player takes in current player's marker and returns the opposite player" do
@@ -11,7 +11,7 @@ defmodule TTTTest do
       current_player: %Human{marker: "X"}
     }
 
-    assert TTT.switch_player("X", game) == %Easy_Mode{marker: "O"}
+    assert Controller.switch_player("X", game) == %Easy_Mode{marker: "O"}
   end
 
   test "get_current_move returns an updated board when a valid move is passed in" do
@@ -23,7 +23,7 @@ defmodule TTTTest do
     }
 
     output = fn ->
-      assert TTT.get_current_move({true, 1}, game) == ["X", 2, 3, 4, 5, 6, 7, 8, 9]
+      assert Controller.get_current_move({true, 1}, game) == ["X", 2, 3, 4, 5, 6, 7, 8, 9]
     end
 
     assert capture_io(output) == "Player \"X\" selected space 1.\n"
@@ -37,7 +37,7 @@ defmodule TTTTest do
       current_player: %Human{marker: "X"}
     }
 
-    output = fn -> TTT.get_current_move(game) end
+    output = fn -> Controller.get_current_move(game) end
 
     assert capture_io([input: "1\n2", capture_prompt: false], output) ==
              "That cell is filled please choose an empty location.\nPlayer \"X\" selected space 2.\n"
@@ -51,14 +51,14 @@ defmodule TTTTest do
       current_player: %Human{marker: "X"}
     }
 
-    output = fn -> TTT.get_current_move(game) end
+    output = fn -> Controller.get_current_move(game) end
 
     assert capture_io([input: "&\n1", capture_prompt: false], output) ==
-             "\" & \" is not a number, please enter 1 - 9.\nPlayer \"X\" selected space 1.\n"
+             "\" & \" is not a valid space, please enter 1 - 9.\nPlayer \"X\" selected space 1.\n"
   end
 
   test "get_input displays a message to the console and prompts the user for input" do
-    output = fn -> TTT.get_input(:get_move, "X", FakeIO) |> IO.write() end
+    output = fn -> Controller.get_input(:get_move, "X", FakeIO) |> IO.write() end
     assert capture_io(output) == "1"
   end
 end
