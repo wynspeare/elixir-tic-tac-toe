@@ -13,6 +13,13 @@ defmodule Hard_Mode do
     end
   end
 
+  def minimax(board, current, {max_player, min_player}) do
+    next_boards(board, {max_player, min_player})
+    |> score_next_boards(current, {max_player, min_player})
+    |> next_level(current, {max_player, min_player})
+    # |> get_best()
+  end
+
   def next_boards(board, {max_player, _min_player}) do
     available_moves = Board.available_cells(board)
 
@@ -24,7 +31,47 @@ defmodule Hard_Mode do
   def score_next_boards(next_boards, current, {max_player, min_player}) do
     next_boards
     |> Enum.map(fn {board, move} ->
-      {score(board, current, {max_player, min_player}), move}
+      if is_list(board) do
+        if Rules.is_over(board, current) do
+          {score(board, current, {max_player, min_player}), move}
+        else
+          {score(board, current, {max_player, min_player}), board, move}
+        end
+      end
+    end)
+  end
+
+  def next_level(tree, current, {max_player, min_player}) do
+    tree
+    |> Enum.map(fn potential_board ->
+      if is_list(elem(potential_board, 1)) do
+
+        current = switch_player(current, {max_player, min_player})
+
+        elem(potential_board, 1)
+
+        |> next_boards({min_player, max_player})
+        |> score_next_boards(current, {max_player, min_player}, elem(potential_board, 2))
+      else
+        potential_board
+      end
+    end)
+    |> List.flatten()
+    |> get_best()
+
+  end
+
+  def score_next_boards(next_boards, current, {max_player, min_player}, original_move) do
+    next_boards
+    |> Enum.map(fn {board, _} ->
+      if is_list(board) do
+        if Rules.is_over(board, current) do
+          {score(board, current, {max_player, min_player}), original_move}
+        else
+          [{score(board, current, {max_player, min_player}), board, original_move}]
+          |> next_level(current, {max_player, min_player})
+        end
+      end
     end)
   end
 
@@ -34,9 +81,8 @@ defmodule Hard_Mode do
     |> elem(1)
   end
 
-  def switch_player(current_player_marker, {max_player, min_player}) do
-    IO.puts("switching!")
 
+  def switch_player(current_player_marker, {max_player, min_player}) do
     if current_player_marker == max_player do
       min_player
     else
