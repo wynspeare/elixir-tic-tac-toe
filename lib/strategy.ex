@@ -2,9 +2,7 @@ defprotocol Strategy do
   @doc """
   Returns a board location for a player to mark.
   """
-  # def decide(player, board)
   def decide(player, game)
-
 end
 
 defimpl Strategy, for: Easy_Mode do
@@ -12,10 +10,6 @@ defimpl Strategy, for: Easy_Mode do
   Gets move by randomly selecting move from available cells
   """
 
-  # def decide(easy_mode, board) do
-  #   easy_mode.marker
-  #   |> Easy_Mode.get_random_move(board)
-  # end
   def decide(easy_mode, game) do
     easy_mode.marker
     |> Easy_Mode.get_random_move(game.board)
@@ -34,14 +28,15 @@ end
 
 defimpl Strategy, for: Hard_Mode do
   @doc """
-  Gets move by randomly selecting move from available cells
+  Gets move by selecting best move from available cells
   """
 
   def decide(hard_mode, game) do
-    if hard_mode.marker == game.player_one.marker do
-        Hard_Mode.get_best_move(game.board, hard_mode.marker, game.player_one.marker, game.player_two.marker)
-      else
-        Hard_Mode.get_best_move(game.board, hard_mode.marker, game.player_two.marker, game.player_one.marker)
-      end
+    Hard_Mode.get_best_move(
+      game.board,
+      hard_mode.marker,
+      game.player_two.marker,
+      game.player_one.marker
+    )
   end
 end

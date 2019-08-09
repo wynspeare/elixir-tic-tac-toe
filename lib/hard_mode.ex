@@ -13,36 +13,59 @@ defmodule Hard_Mode do
     end
   end
 
-  def get_best_move(board, current, max_player, min_player, over \\ false, scores \\ [], depth \\ 0)
-  def get_best_move(board, current, max_player, min_player, true, _scores, depth), do: score(board, current, max_player, min_player, depth)
+  def get_best_move(
+        board,
+        current,
+        max_player,
+        min_player,
+        over \\ false,
+        scores \\ [],
+        depth \\ 0
+      )
+
+  def get_best_move(board, current, max_player, min_player, true, _scores, depth),
+    do: score(board, current, max_player, min_player, depth)
+
   def get_best_move(board, current, max_player, min_player, false, _scores, depth) do
     scores =
-    Enum.map(board |> Board.available_cells, fn(move) ->
+      Enum.map(board |> Board.available_cells(), fn move ->
+        potential_board = Board.place_marker(move, board, current)
+        current = switch_player(current, max_player, min_player)
 
-      potential_board = Board.place_marker(move, board, current)
-      current = switch_player(current, max_player, min_player)
+        score =
+          if depth < 5,
+            do:
+              get_best_move(
+                potential_board,
+                current,
+                max_player,
+                min_player,
+                Rules.is_over(potential_board, current),
+                [],
+                depth + 1
+              )
 
-      score = if depth < 5, do: get_best_move(potential_board, current, max_player, min_player, Rules.is_over(potential_board, current), [], depth + 1)
-      {move, score}
-    end)
+        {move, score}
+      end)
+
     if depth == 0, do: best_move(scores), else: minimax_score(max_player, scores)
   end
 
   def minimax_score(max_player, scores) do
     if max_player == :marker do
       scores
-      |> Enum.max_by(fn({_move, score}) -> score end)
+      |> Enum.max_by(fn {_move, score} -> score end)
       |> elem(1)
     else
       scores
-      |> Enum.min_by(fn({_move, score}) -> score end)
+      |> Enum.min_by(fn {_move, score} -> score end)
       |> elem(1)
     end
   end
 
   def best_move(scores) do
     scores
-    |> Enum.max_by(fn({_move, score}) -> score end)
+    |> Enum.max_by(fn {_move, score} -> score end)
     |> elem(0)
   end
 
@@ -54,4 +77,3 @@ defmodule Hard_Mode do
     end
   end
 end
-
