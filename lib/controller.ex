@@ -20,7 +20,7 @@ defmodule Controller do
 
   def get_current_move(game) do
     game.current_player
-    |> Strategy.decide(game.board)
+    |> Strategy.decide(game)
     |> Validator.is_valid_move(game.board)
     |> get_current_move(game)
   end
