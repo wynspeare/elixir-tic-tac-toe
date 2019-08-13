@@ -31,12 +31,7 @@ defimpl Strategy, for: Hard_Mode do
   Gets move by selecting best move from available cells
   """
 
-  def decide(hard_mode, game) do
-    Hard_Mode.get_best_move(
-      game.board,
-      hard_mode.marker,
-      game.player_two.marker,
-      game.player_one.marker
-    )
+  def decide(_, game) do
+    Hard_Mode.get_best_move(game)
   end
 end

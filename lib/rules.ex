@@ -24,8 +24,8 @@ defmodule Rules do
   def get_combos(board) do
     combo_length = Formatter.get_combo_length(board)
 
-    Formatter.get_rows(board, combo_length) ++
-      Formatter.get_columns(board, combo_length) ++
-      Formatter.get_diagonals(board, combo_length)
+    Formatter.get_rows(board, combo_length)
+    ++  Formatter.get_columns(board, combo_length)
+    ++ Formatter.get_diagonals(board, combo_length)
   end
 end

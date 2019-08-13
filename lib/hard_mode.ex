@@ -10,73 +10,62 @@ defmodule Hard_Mode do
     computer = Hard_Mode.build(game.current_player.marker)
 
     cond do
-      # Rules.is_won(game.board, game.current_player.marker) and game.current_player.marker == game.player_two.marker -> 10 - depth
-      Rules.is_won(game.board, game.current_player.marker) and game.current_player == computer -> 10 - depth
-      Rules.is_won(game.board, game.current_player.marker) and game.current_player == human -> depth - 10
-      true -> 0
+      Rules.is_won(game.board, game.current_player.marker) and game.current_player == computer ->
+        10 - depth
+
+      Rules.is_won(game.board, game.current_player.marker) and game.current_player == human ->
+        depth - 10
+
+      true ->
+        0
     end
   end
 
-  # def get_best_move(
-  #       board,
-  #       current,
-  #       max_player,
-  #       min_player,
-  #       over \\ false,
-  #       scores \\ [],
-  #       depth \\ 0
-  #     )
+  def get_best_move(game, over \\ false, scores \\ [], depth \\ 0)
 
-  # def get_best_move(board, current, max_player, min_player, true, _scores, depth),
-  #   do: score(board, current, max_player, min_player, depth)
+  def get_best_move(game, true, _scores, depth),
+    do: score(game, depth)
 
-  # def get_best_move(board, current, max_player, min_player, false, _scores, depth) do
-  #   scores =
-  #     Enum.map(board |> Board.available_cells(), fn move ->
-  #       potential_board = Board.place_marker(move, board, current)
-  #       current = switch_player(current, max_player, min_player)
+  def get_best_move(game, false, _scores, depth) do
+    scores =
+      Enum.map(game.board |> Board.available_cells(), fn move ->
+        new_game = %{
+          game
+          | board: Board.place_marker(move, game.board, game.current_player.marker),
+            current_player: Controller.switch_player(game.current_player.marker, game)
+        }
 
-  #       score =
-  #         if depth < 5,
-  #           do:
-  #             get_best_move(
-  #               potential_board,
-  #               current,
-  #               max_player,
-  #               min_player,
-  #               Rules.is_over(potential_board, current),
-  #               [],
-  #               depth + 1
-  #             )
+        score =
+          if depth < 5,
+            do:
+              get_best_move(
+                new_game,
+                Rules.is_over(new_game.board, new_game.current_player.marker),
+                [],
+                depth + 1
+              )
 
-  #       {move, score}
-  #     end)
+        {move, score}
+      end)
 
-  #   if depth == 0, do: best_move(scores), else: get_minimax_score(max_player, scores)
-  # end
-  # def get_minimax_score(max_player, scores) do
-  #   if max_player == :marker do
-  #     scores
-  #     |> Enum.max_by(fn {_move, score} -> score end)
-  #     |> elem(1)
-  #   else
-  #     scores
-  #     |> Enum.min_by(fn {_move, score} -> score end)
-  #     |> elem(1)
-  #   end
-  # end
+    if depth == 0, do: best_move(scores), else: get_minimax_score(game.player_two.marker, scores)
+  end
 
-  # def best_move(scores) do
-  #   scores
-  #   |> Enum.max_by(fn {_move, score} -> score end)
-  #   |> elem(0)
-  # end
+  def get_minimax_score(max_player, scores) do
+    if max_player == :marker do
+      scores
+      |> Enum.max_by(fn {_move, score} -> score end)
+      |> elem(1)
+    else
+      scores
+      |> Enum.min_by(fn {_move, score} -> score end)
+      |> elem(1)
+    end
+  end
 
-  # def switch_player(current_player_marker, max_player, min_player) do
-  #   if current_player_marker == max_player do
-  #     min_player
-  #   else
-  #     max_player
-  #   end
-  # end
+  def best_move(scores) do
+    scores
+    |> Enum.max_by(fn {_move, score} -> score end)
+    |> elem(0)
+  end
 end

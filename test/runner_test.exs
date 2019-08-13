@@ -31,7 +31,7 @@ defmodule RunnerTest do
              [input: "Y\nY\nY\nn\n1\n2\n3\n4\n5\n6\n7\n8\n9", capture_prompt: false],
              output
            ) =~
-             "You have started a new game of TTT!\n"
+             "HARD MODE activated!\n"
   end
 
   test "user can play a single player game on easy mode" do

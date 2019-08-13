@@ -1,15 +1,15 @@
 defmodule FormatterTest do
   use ExUnit.Case
 
-  test "format empty cell adds a pipe and spaces" do
+  test "format_cell takes in an integer (empty cell) adds a pipe and spaces" do
     assert(Formatter.format_cell(1) == "| 1 ")
   end
 
-  test "format filled cell adds a pipe and spaces" do
+  test "format_cell takes in a string (filled cell) adds a pipe and spaces" do
     assert(Formatter.format_cell("X") == "| X ")
   end
 
-  test "format_board returns a list of formatted cells" do
+  test "format_cells returns a list of formatted cells" do
     assert Formatter.format_cells([1, "X"]) == ["| 1 ", "| X "]
   end
 
@@ -55,7 +55,7 @@ defmodule FormatterTest do
              ]
   end
 
-  test "split_into_rows takes a list of 9 elements returns a chunked list of 3 rows" do
+  test "get_rows takes a list of 9 elements returns a chunked list of 3 rows" do
     assert Formatter.get_rows([1, "X", 3, 4, 5, 6, "O", "X", 9], 3) == [
              [1, "X", 3],
              [4, 5, 6],
@@ -63,7 +63,7 @@ defmodule FormatterTest do
            ]
   end
 
-  test "split_into_rows takes a list of 16 elements returns a chunked list of 4 rows" do
+  test "get_rows takes a list of 16 elements returns a chunked list of 4 rows" do
     assert Formatter.get_rows([1, 2, 3, 4, 5, 6, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16], 4) == [
              [1, 2, 3, 4],
              [5, 6, 6, 8],
@@ -72,7 +72,7 @@ defmodule FormatterTest do
            ]
   end
 
-  test "format_rows inserts a divider in chunked board" do
+  test "add_row_dividers inserts a divider in chunked board" do
     assert Formatter.add_row_dividers([
              ["| 1 ", "| X ", "| 3 "],
              ["| 4 ", "| 5 ", "| 6 "],

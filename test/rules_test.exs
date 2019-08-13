@@ -1,7 +1,7 @@
 defmodule RulesTest do
   use ExUnit.Case
 
-  test "take in a board of nine elements zero and extract any winning combos" do
+  test "get_combos takes in a board of nine elements and returns all possible winning combos" do
     board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
     assert Rules.get_combos(board) == [
@@ -16,7 +16,7 @@ defmodule RulesTest do
            ]
   end
 
-  test "take in a board of 16 elements zero and extract any winning combos" do
+  test "get_combos take in a board of 16 elements and returns all winning combos" do
     board = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
     assert Rules.get_combos(board) == [

@@ -11,7 +11,7 @@ defmodule Easy_ModeTest do
     assert String.to_integer(capture_io(output)) in 1..9
   end
 
-  test "Easy mode can select a the last available move from the board" do
+  test "Easy mode can select the last available move from the board" do
     board = ["O", "O", "O", "O", "O", 6, "O", "O", "O"]
 
     output = fn -> Easy_Mode.get_random_move("X", board) |> IO.write() end
