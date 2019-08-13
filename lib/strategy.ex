@@ -23,6 +23,8 @@ defimpl Strategy, for: Human do
   def decide(human, game) do
     human.marker
     |> Human.get_move(game.board)
+
+
   end
 end
 

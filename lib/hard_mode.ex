@@ -51,6 +51,27 @@ defmodule Hard_Mode do
     if depth == 0, do: best_move(scores), else: get_minimax_score(game.player_two.marker, scores)
   end
 
+  # def get_minimax_score(max_player, scores) do
+  #   move = if max_player == :marker do
+  #         scores
+  #         |> Enum.max_by(fn {_move, score} -> score end)
+  #         |> elem(1)
+  #       else
+  #         scores
+  #         |> Enum.min_by(fn {_move, score} -> score end)
+  #         |> elem(1)
+  #       end
+  #       {true, move}
+
+  # end
+
+  # def best_move(scores) do
+  # move = scores
+  #   |> Enum.max_by(fn {_move, score} -> score end)
+  #   |> elem(0)
+  #   {true, move}
+  # end
+
   def get_minimax_score(max_player, scores) do
     if max_player == :marker do
       scores

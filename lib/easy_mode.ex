@@ -7,7 +7,7 @@ defmodule Easy_Mode do
 
   def get_random_move(_marker, board) do
     board
-    |> Board.available_cells()
-    |> Enum.random()
+        |> Board.available_cells()
+        |> Enum.random()
   end
 end

@@ -21,7 +21,7 @@ defmodule Controller do
   def get_current_move(game) do
     game.current_player
     |> Strategy.decide(game)
-    |> Validator.is_valid_move(game.board)
+    # |> Validator.is_valid_move(game.board)
     |> get_current_move(game)
   end
 
@@ -40,6 +40,13 @@ defmodule Controller do
   end
 
   def get_current_move({_, valid_move}, game) do
+    valid_move
+    |> display_move(game.current_player.marker)
+    |> Board.place_marker(game.board, game.current_player.marker)
+  end
+
+  def get_current_move(valid_move, game) when is_integer(valid_move) do
+    IO.puts("COMP move:")
     valid_move
     |> display_move(game.current_player.marker)
     |> Board.place_marker(game.board, game.current_player.marker)
