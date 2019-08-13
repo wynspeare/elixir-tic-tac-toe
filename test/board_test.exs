@@ -23,6 +23,6 @@ defmodule BoardTest do
 
   test "is_cell_empty returns true if provided location is not filled" do
     board = [1, "X", "X", 4, 5, "O", "O", "O", 9]
-    assert Board.is_cell_empty(1, board) == {true, 1}
+    assert Board.is_cell_empty(1, board) == true
   end
 end

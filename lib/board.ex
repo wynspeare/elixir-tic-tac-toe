@@ -12,10 +12,6 @@ defmodule Board do
   end
 
   def is_cell_empty(cell, board) when Kernel.is_integer(cell) do
-    {Enum.member?(available_cells(board), cell), cell}
-  end
-
-  def is_cell_empty({false, location}, _board) do
-    {false, location}
+    Enum.member?(available_cells(board), cell)
   end
 end

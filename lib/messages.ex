@@ -35,7 +35,8 @@ defmodule Messages do
         "Let's begin!\n\nPlayer One - Your marker is \"#{value_1}\".\nPlayer Two - Your marker is \"#{
           value_2
         }\".\n",
-      show_move: "Player \"#{value_1}\" selected space #{value_2}."
+      show_move: "Player \"#{value_1}\" selected space #{value_2}.",
+      show_comp_move: "The computer - player \"#{value_1}\" selected space #{value_2}."
     }
 
     messages[term]
