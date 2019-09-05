@@ -24,13 +24,23 @@ defmodule RunnerTest do
              "This game is a draw.\n"
   end
 
-  test "user can play a single player game" do
+  test "user can play a single player game on hard mode" do
     output = fn -> Runner.start_game() end
 
     assert capture_io(
-             [input: "Y\nY\nn\n1\n2\n3\n4\n5\n6\n7\n8\n9", capture_prompt: false],
+             [input: "Y\nY\nY\nn\n1\n2\n3\n4\n5\n6\n7\n8\n9", capture_prompt: false],
              output
            ) =~
-             "You have started a new game of TTT!\n"
+             "HARD MODE activated!\n"
+  end
+
+  test "user can play a single player game on easy mode" do
+    output = fn -> Runner.start_game() end
+
+    assert capture_io(
+             [input: "Y\nY\nN\nn\n1\n2\n3\n4\n5\n6\n7\n8\n9", capture_prompt: false],
+             output
+           ) =~
+             "EASY MODE activated!\n"
   end
 end

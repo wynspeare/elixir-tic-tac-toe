@@ -36,7 +36,7 @@ defmodule ValidatorTest do
     assert Validator.is_valid_move("a", board) == {false, "a"}
   end
 
-  test "0is_valid_move returns tuple with false and integer location if cell is empty" do
+  test "is_valid_move returns tuple with false and integer location if cell is empty" do
     board = [1, 2, "X", 4, 5, "O", "O", "O", 9]
     assert Validator.is_valid_move("0", board) == {false, "0"}
   end

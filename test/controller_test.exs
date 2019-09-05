@@ -47,7 +47,7 @@ defmodule ControllerTest do
     game = %Game{
       board: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       player_one: %Human{marker: "X"},
-      player_two: %Easy_Mode{marker: "O"},
+      player_two: %Hard_Mode{marker: "O"},
       current_player: %Human{marker: "X"}
     }
 

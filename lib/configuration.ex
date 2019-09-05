@@ -20,6 +20,27 @@ defmodule Configuration do
     :choose_again |> Messages.get() |> Console.display()
   end
 
+  def hard_mode_game() do
+    :hard_mode
+    |> Messages.get()
+    |> Console.get_input()
+    |> hard_mode_game()
+  end
+
+  def hard_mode_game("Y") do
+    :display_mode |> Messages.get("HARD") |> Console.display()
+
+    get_markers()
+    |> Players.build(true)
+  end
+
+  def hard_mode_game("N") do
+    :display_mode |> Messages.get("EASY") |> Console.display()
+
+    get_markers()
+    |> Players.build(false)
+  end
+
   def single_player_game() do
     :single_player
     |> Messages.get()
@@ -28,8 +49,7 @@ defmodule Configuration do
   end
 
   def single_player_game("Y") do
-    get_markers()
-    |> Players.build(true)
+    hard_mode_game()
   end
 
   def single_player_game("N") do

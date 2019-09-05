@@ -10,7 +10,8 @@ defmodule Messages do
       custom_markers: "Do you want to choose custom markers for the players?\n",
       cell_filled: "That cell is filled please choose an empty location.",
       draw: "This game is a draw.",
-      different_markers: "Choose a different symbol - they cannot be the same!"
+      different_markers: "Choose a different symbol - they cannot be the same!",
+      hard_mode: "Do you want to play on hard mode against an unbeatable computer?\n"
     }
 
     messages[term]
@@ -21,7 +22,8 @@ defmodule Messages do
       get_move: "Player #{value} it is your turn. Please select a cell 1 - 9:\n",
       invalid_move: "\" #{value} \" is not a valid space, please enter 1 - 9.",
       winner: "#{value} is the WINNER!!",
-      get_marker: "Please enter a marker for Player #{value}:\n"
+      get_marker: "Please enter a marker for Player #{value}:\n",
+      display_mode: "#{value} MODE activated!"
     }
 
     messages[term]
@@ -33,7 +35,8 @@ defmodule Messages do
         "Let's begin!\n\nPlayer One - Your marker is \"#{value_1}\".\nPlayer Two - Your marker is \"#{
           value_2
         }\".\n",
-      show_move: "Player \"#{value_1}\" selected space #{value_2}."
+      show_move: "Player \"#{value_1}\" selected space #{value_2}.",
+      show_comp_move: "The computer - player \"#{value_1}\" selected space #{value_2}."
     }
 
     messages[term]

@@ -20,28 +20,29 @@ defmodule Controller do
 
   def get_current_move(game) do
     game.current_player
-    |> Strategy.decide(game.board)
-    |> Validator.is_valid_move(game.board)
+    |> Strategy.decide(game)
     |> get_current_move(game)
   end
 
   def get_current_move({false, move}, game) when is_integer(move) do
-    Messages.get(:cell_filled)
-    |> Console.display()
-
+    Messages.get(:cell_filled) |> Console.display()
     get_current_move(game)
   end
 
   def get_current_move({false, move}, game) do
-    Messages.get(:invalid_move, move)
-    |> Console.display()
-
+    Messages.get(:invalid_move, move) |> Console.display()
     get_current_move(game)
   end
 
   def get_current_move({_, valid_move}, game) do
     valid_move
     |> display_move(game.current_player.marker)
+    |> Board.place_marker(game.board, game.current_player.marker)
+  end
+
+  def get_current_move(valid_move, game) when is_integer(valid_move) do
+    valid_move
+    |> display_move(game.current_player.marker, true)
     |> Board.place_marker(game.board, game.current_player.marker)
   end
 
@@ -66,6 +67,13 @@ defmodule Controller do
 
   def display_move(cell_location, marker) do
     Messages.get(:show_move, marker, cell_location)
+    |> Console.display()
+
+    cell_location
+  end
+
+  def display_move(cell_location, marker, _computer) do
+    Messages.get(:show_comp_move, marker, cell_location)
     |> Console.display()
 
     cell_location

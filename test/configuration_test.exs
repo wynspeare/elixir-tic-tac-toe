@@ -38,14 +38,14 @@ defmodule ConfigurationTest do
   test "user can enter Y to play a single player game" do
     output = fn -> Configuration.single_player_game() end
 
-    assert capture_io([input: "Y\nN", capture_prompt: false], output) =~
+    assert capture_io([input: "Y\nY\nN", capture_prompt: false], output) =~
              "Let's begin!\n\nPlayer One - Your marker is \"X\".\nPlayer Two - Your marker is \"O\".\n\n"
   end
 
   test "user can only enter Y/N to play a single player game" do
     output = fn -> Configuration.single_player_game("*") end
 
-    assert capture_io([input: "@\nY\nn", capture_prompt: false], output) =~
+    assert capture_io([input: "@\nY\nn\nn", capture_prompt: false], output) =~
              "Please enter Y/N only\n"
   end
 
@@ -62,7 +62,7 @@ defmodule ConfigurationTest do
     response = fn -> Configuration.use_custom_markers("Y") end
 
     assert capture_io([input: "+\n#"], response) =~
-             "Please enter a marker for Player One:\n"
+             "Let's begin!\n\nPlayer One - Your marker is \"+\".\nPlayer Two - Your marker is \"#\".\n\n"
   end
 
   test "user cannot enter anything other than Y/N when prompted to use custom markers" do
@@ -72,7 +72,7 @@ defmodule ConfigurationTest do
              "Please enter Y/N only\n"
   end
 
-  test "when get_markers is passed a custom marker it gets the second marker" do
+  test "when get_markers is passed a custom marker it asks for a second custom marker" do
     output = fn -> Configuration.get_markers("+") end
 
     assert capture_io([input: "@", capture_prompt: false], output) ==
@@ -86,7 +86,7 @@ defmodule ConfigurationTest do
              "Choose a different symbol - they cannot be the same!\nLet's begin!\n\nPlayer One - Your marker is \"+\".\nPlayer Two - Your marker is \"@\".\n\n"
   end
 
-  test "different_markers? returns the markers when they are different" do
+  test "different_markers returns the two custom markers if they are different" do
     assert Configuration.different_markers?({"+", "^"}) == {"+", "^"}
   end
 end
